@@ -1,0 +1,153 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		title Basic Stock Data Query
+		link(rel='stylesheet', type='text/css', href='/css/basic_query.css')
+		script(src='/js/basic_query.js')
+	body
+		main
+			div#basic_query
+				div#basic_query_header
+					h1 Basic Stock Data Query
+				form(id='basic_query_form', onsubmit='OnQuerySubmit(event)')
+					div#form_container
+						div#basic_query_body_left
+							div(class='query_param', id='stock_tickers')
+								h2 Stock Ticker/Symbol(s)
+								input(class='query_param_input', id='stock_tickers_input', type='text', placeholder='Enter Stock Ticker/Symbol(s), separate multiple with ","')
+							div(class='query_param', id='exchanges')
+								h2 Exchange(s)
+								select(class='query_param_input', id='exchanges_input', multiple)
+									option(value='A') NYSE MKT Stock Exchange
+									option(value='B') NASDAQ OMX BX Stock Exchange
+									option(value='C') National Stock Exchange
+									option(value='D') FINRA
+									option(value='I') International Securities Exchange
+									option(value='J') Direct Edge A Stock Exchange
+									option(value='K') Direct Edge X Stock Exchange
+									option(value='M') Chicago Stock Exchange
+									option(value='N') New York Stock Exchange
+									option(value='T') NASDAQ OMX Stock Exchange
+									option(value='P') NYSE Arca SM
+									option(value='S') Consolidated Tape System
+									option(value='T') NASDAQ Stock Exchange
+									option(value='Q') NASDAQ Stock Exchange
+									option(value='W') CBOE Stock Exchange
+									option(value='X') NASDAQ OMX PSX Stock Exchange
+									option(value='Y') BATS Y-Exchange
+									option(value='Z') BATS Exchange
+
+							div(class='query_param_container', id='price_container')
+								h2 Price Range
+								div(class='query_param', id='price_range')
+									div(class='query_sub_param', id='min_price')
+										h2 Min
+										input(class='query_param_input', id='min_price_input', type='number', step='0.01', placeholder='Enter Min Price')
+									div(class='query_sub_param', id='max_price')
+										h2 Max
+										input(class='query_param_input', id='max_price_input', type='number', step='0.01', placeholder='Enter Max Price')
+							div(class='query_param_container', id='volume_container')
+								h2 Sale Volume Range
+								div(class='query_param', id='volume_range')
+									div(class='query_sub_param', id='min_volume')
+										h2 Min
+										input(class='query_param_input', id='min_volume_input', type='number', step='0.01', placeholder='Enter Min Volume')
+									div(class='query_sub_param', id='max_volume')
+										h2 Max
+										input(class='query_param_input', id='max_volume_input', type='number', step='0.01', placeholder='Enter Max Volume')
+							div(class='query_param', id='fields')
+								h2 Fields
+								input(class='query_param_input', id='fields_input', type='text', placeholder='Enter Fields, separate multiple with ","')
+							div(class='query_param', id='sort_by')
+								h2 Sort By
+								input(class='query_param_input', id='sort_by_input', type='text', placeholder='Enter Sort By')
+
+							div(class='query_param', id='sort_order')
+								h2 Sort Order
+								select(class='query_param_input', id='sort_order_input')
+									option(value='asc') Ascending
+									option(value='desc') Descending
+
+							div(class='query_param', id='limit')
+								h2 Limit
+								input(class='query_param_input', id='limit_input', type='number', step='1', placeholder='Enter Limit')
+
+						div#basic_query_body_right
+							div(class='query_param', id='start_date')
+								h2 Start Date
+								input(class='query_param_input', id='start_date_input', type='date')
+							div(class='query_param', id='end_date')
+								h2 End Date
+								input(class='query_param_input', id='end_date_input', type='date')
+							div(class='query_param', id='start_time')
+								h2 Start Time
+								input(class='query_param_input', id='start_time_input', type='time')
+							div(class='query_param', id='end_time')
+								h2 End Time
+								input(class='query_param_input', id='end_time_input', type='time')
+							div(class='query_param', id='is_suspicious')
+								h2 Suspicious Trades
+								select(class='query_param_input', id='is_suspicious_input')
+									option(value='0') All
+									option(value='1') Yes
+									option(value='2') No
+							div(class='query_param', id='sale_conditions')
+								h2 Sale Conditions
+								select(class='query_param_input', id='sale_conditions_input' multiple)
+									option(value='CTS_@') Regular Sale (no condition)
+									option(value='CTS_B') Average Price Trade
+									option(value='CTS_C') Cash Trade (same day clearing)
+									option(value='CTS_E') Automatic Execution
+									option(value='CTS_F') Intermarket Sweep Order
+									option(value='CTS_G') Opening/Reopening Trade Detail
+									option(value='CTS_H') Intraday Trade Detail
+									option(value='CTS_I') CAP Election Trade
+									option(value='CTS_K') Rule 127 trade (NYSE only) or Rule 155 trade (NYSE MKT only)
+									option(value='CTS_L') Sold Last (late reporting)
+									option(value='CTS_N') Next Day Trade (next day clearing)
+									option(value='CTS_O') Market Center Opening Trade
+									option(value='CTS_R') Seller
+									option(value='CTS_T') Extended Hours Trade
+									option(value='CTS_U') Extended Hours (Sold Out of Sequence)
+									option(value='CTS_Z') Sold (out of sequence)
+									option(value='CTS_4') Derivatively Priced
+									option(value='CTS_5') Market Center Re-opening Prints
+									option(value='CTS_6') Market Center Closing Prints
+									option(value='NASD_@') Regular Trade
+									option(value='NASD_A') Acquisition
+									option(value='NASD_B') Bunched Trade
+									option(value='NASD_C') Cash Trade
+									option(value='NASD_D') Distribution
+									option(value='NASD_F') Intermarket Sweep
+									option(value='NASD_G') Bunched Sold Trade
+									option(value='NASD_K') Rule 155 Trade (NYSE MKT Only)
+									option(value='NASD_L') Sold Last
+									option(value='NASD_M') Market Center Close Price
+									option(value='NASD_N') Next Day
+									option(value='NASD_O') Opening Prints
+									option(value='NASD_P') Prior Reference Price
+									option(value='NASD_Q') Market Center Open Price
+									option(value='NASD_R') Seller (Long-Form Message Formats Only)
+									option(value='NASD_S') Split Trade
+									option(value='NASD_T') Form - T Trade
+									option(value='NASD_U') Extended Hours (Sold Out of Sequence)
+									option(value='NASD_W') Average Price Trade
+									option(value='NASD_Y') Yellow Flag
+									option(value='NASD_Z') Sold (Out of Sequence)
+									option(value='NASD_1') Stopped Stock - Regular Trade
+									option(value='NASD_2') Stopped Stock - Sold Last
+									option(value='NASD_3') Stopped Stock - Sold
+									option(value='NASD_4') Derivatively Priced
+									option(value='NASD_5') Re-opening Prints
+									option(value='NASD_6') Closing Prints
+									option(value='NASD_7') Placeholder for 611 Exempt
+									option(value='NASD_8') Placeholder for 611 Exempt
+									option(value='NASD_9') Placeholder for 611 Exempt
+
+					div#submit_container
+						input#submit_button(type='submit', value='Query Trades')
+				div#query_results_container
+					h2 Query Results
+					select#query_results_list(name='query_results_list' multiple)

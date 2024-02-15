@@ -1,0 +1,159 @@
+body {
+	background-color: lightgray;
+	width: 100%;
+	height: 100%;
+	font-family: 'Roboto', sans-serif;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+main {
+	background-color: white;
+	width: 60%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search_engine {
+	background-color: navy;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search_engine_header {
+	background-color: darkslateblue;
+	width: 100%;
+	height: 10%;
+}
+
+#search_engine_header h1 {
+	font-size: 35px;
+	margin-left: 30px;
+	font-weight: bold;
+	color: lightgray;
+}
+
+#search_engine_body {
+	background-color: navy;
+	width: 100%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search_engine_body_header {
+	background-color: gray;
+	width: 100%;
+	height: 10%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search_engine_body_header h2 {
+	font-size: 25px;
+}
+
+#search_engine_body_body {
+	background-color: teal;
+	width: 100%;
+	height: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: left;
+}
+
+#search_engine_form {
+	background-color: #c5cae9;
+	height: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: right;
+	margin-right: 0px;
+}
+
+#search_results_container {
+	background-color: #a5d6a7;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#search_results_list {
+	background-color: #c8e6c9;
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-left: 0px;
+}
+
+#search_results_list li {
+	background-color: #e8f5e9;
+	width: 100%;
+	height: 10%;
+	display: flex;
+	flex-direction: row;
+	justify-content: left;
+}
+
+#search_results_list li span {
+	background-color: #e8f5e9;
+	width: 30%;
+	height: 100%;
+	display: flex;
+	margin-left: 30px;
+}
+
+#search_engine_input {
+	margin: 20px;
+	width: 30%;
+	height: 30px;
+}
+
+#search_engine_submit {
+	margin: 20px;
+	width: 10%;
+	height: 35px;
+}
+
+#search_engine_footer {
+	background-color: #e8eaf6;
+	width: 100%;
+	height: 10%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#execute_service_button {
+	background-color: lightgray;
+	width: 30%;
+	margin: 20px;
+	height: 30px;
+	font-size: 18px;
+}
+
+#search_engine_footer h5 {
+	font-size: 15px;
+}
+
+#search_engine_footer p {
+	font-size: 10px;
+}

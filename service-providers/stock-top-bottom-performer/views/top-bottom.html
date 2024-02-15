@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Top-Bottom Performers</h2>
+<p>Please input your values</p>
+
+<label for="startDate">Start Date:</label>
+<input type="text" id="start" name="start" placeholder="yyyy/mm/dd"><br><br>
+<label for="endDate">End Date:</label>
+<input type="text" id="end" name="end" placeholder="yyyy/mm/dd"><br><br>
+<input type="submit" value="Submit" onclick="getData()">
+
+
+
+<p id="demo"></p>
+
+<script>
+async function getData(){
+	var startDate = document.getElementById("start").value
+	startDate = startDate.replace("/", "");
+	startDate = startDate.replace("/", "");
+	var endDate = document.getElementById("end").value
+	endDate = endDate.replace("/", "");
+	endDate = endDate.replace("/", "");
+	console.log(startDate, endDate)
+	const response = await fetch("https://top-bottom-service.1ao8ba60ugpt.us-east.codeengine.appdomain.cloud:443/api/services/top-bottom-performer/query", {
+			method: "POST",
+			body: JSON.stringify({
+			query: {
+				startDate: startDate,
+				endDate: endDate
+			},
+			fields: [
+				"_id",
+				"price",
+				"date",
+				"ticker"
+			]
+			}),
+			headers: {
+			"Content-type": "application/json; charset=UTF-8"
+			}
+		});
+		console.log(response)
+		if (response.status != 200) {
+			console.log("Failed to execute service");
+		}
+
+		result = await response.json();
+
+		document.getElementById("demo").innerHTML = result
+}
+</script> 
+
+</body>
+</html>
+
+

@@ -1,0 +1,86 @@
+<%- include('../partials/head') %>
+<body class="container">
+<h1 class="mt-4 mb-4">Top 10 Performers During the Opening and Closing Time of the Market</h1>
+
+<form id="apiForm" class="mb-4">
+    <div class="mb-3">
+        <label for="inputDate" class="form-label">Enter Date:</label>
+        <input type="date" id="inputDate" name="inputDate" class="form-control" required>
+    </div>
+    <div class="mb-3">
+        <label for="timeSelect" class="form-label">Select Time:</label>
+        <select id="timeSelect" class="form-select">
+            <option value="morning">Opening Time</option>
+            <option value="evening">Closing Time</option>
+        </select>
+    </div>
+    <button type="button" onclick="submitForm()" class="btn btn-primary">Submit</button>
+</form>
+
+<div>
+    <label for="responseTable" class="form-label">Top Performers:</label>
+    <table class="table table-bordered" id="responseTable">
+        <thead>
+        <tr>
+            <th>Ticker</th>
+            <th>Average Price</th>
+            <th>Total Size</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (let i = 0; i < data.length; i++) { %>
+            <tr>
+                <td><%= data[i].ticker %></td>
+                <td><%= data[i].average_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2}) %></td>
+                <td><%= data[i].total_size.toLocaleString() %></td>
+            </tr>
+        <% } %>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+<script>
+    function submitForm() {
+        // Get the date input value
+        const inputDate = document.getElementById('inputDate').value;
+
+        // Get the selected time value
+        const selectedTime = document.getElementById('timeSelect').value;
+
+        // Convert the date to the desired format (assuming YYYYMMDD)
+        const formattedDate = inputDate.split('-').join('');
+
+        // Make a GET request to the API
+        fetch(`/api/top-performing-stocks/${selectedTime}?date=${formattedDate}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                // Update the table body with the API response
+                const tableBody = document.querySelector('#responseTable tbody');
+                tableBody.innerHTML = '';
+                for (let i = 0; i < data.length; i++) {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                    <td>${data[i].ticker}</td>
+                    <td>${data[i].average_price.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</td>
+                    <td>${data[i].total_size.toLocaleString()}</td>
+                `;
+                    tableBody.appendChild(row);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('responseTextArea').value = 'Error occurred while making the API request.';
+            });
+    }
+</script>
+</body>
+<%- include('../partials/footer') %>

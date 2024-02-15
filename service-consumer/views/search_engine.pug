@@ -1,0 +1,41 @@
+doctype html
+html(lang='en')
+	head
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, initial-scale=1')
+		title Stock Analytics Search Engine
+		link(rel='stylesheet', type='text/css', href='css/search_engine.css')
+		script(src='js/search_engine.js')
+	body
+		main
+			div#search_engine
+				div#search_engine_header
+					h1 Stock Analytics Service Engine
+				div#search_engine_body
+					div#search_engine_body_header
+						h2 Search Registry for Stock Analytics Services
+					div#search_engine_body_body
+						form#search_engine_form(onsubmit='return OnSearch()')
+							input#search_engine_input(type='text', name='search_engine_input', placeholder='Search...')
+							input#search_engine_submit(type='submit', name='search_engine_submit', value='Search')
+						div#search_results_container
+							if results.length > 0
+								select#search_results_list(name='search_results_list', multiple)
+									each result in results
+										option(value=result.values.serviceName)
+											span.result_name= result.values.serviceName
+											span.space= ' '
+											span.instance_id= result.values.instanceId
+							else
+								ul#search_results_list
+									li
+										span.result_name No results found.
+						div#execute_service_button_container
+							button#execute_service_button(onclick='OnExecuteService()') Execute Service
+				div#search_engine_footer
+					h5 Search Engine Service Consumer Application for Stock Market Analytics
+					p
+						| Developed by: 
+						br
+						br
+						| Paul Scoropan, Rory Welch, Reuben Coutinho, Yusung Kang, and Yash Gupta

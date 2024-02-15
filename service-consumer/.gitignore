@@ -1,0 +1,6 @@
+/dist/
+/.pants.d/
+/.pids/
+/.pants.workdir.file_lock*
+/pants
+

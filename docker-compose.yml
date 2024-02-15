@@ -1,0 +1,19 @@
+version: '3.9'
+services:
+  redis:
+    image: 'redis/redis-stack-server:latest'
+    ports:
+      - '6379:6379'
+  service-registry:
+    depends_on:
+      - redis
+    restart: on-failure
+    build: ./service-registry
+    hostname: registry
+    ports:
+      - '8080:8080'
+    environment:
+      REDIS_HOST: redis
+      REDIS_PROT: 6379
+      REDIS_USERNAME: default
+      REDIS_PASSWORD: redispw
